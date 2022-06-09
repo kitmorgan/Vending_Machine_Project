@@ -57,4 +57,8 @@ abstract class Item {
     public void setNoise(String noise) {
         this.noise = noise;
     }
+
+    public void dispense() {
+        this.quantity = quantity-1;
+    }
 }

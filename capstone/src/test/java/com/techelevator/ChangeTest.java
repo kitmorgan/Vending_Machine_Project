@@ -18,14 +18,16 @@ public class ChangeTest {
         int expectedP = 0;
 
         Map<String, Integer> outputMap = moneyManager.coinsDue();
-        int outcomeQ = outputMap.get("QUARTER");
-        int outcomeD = outputMap.get("DIME");
-        int outcomeN = outputMap.get("NICKEL");
-        int outcomeP = outputMap.get("PENNY");
+        int outcomeQ = outputMap.get("quarter");
+        int outcomeD = outputMap.get("dime");
+        int outcomeN = outputMap.get("nickel");
+        int outcomeP = outputMap.get("penny");
+        System.out.println(outputMap);
         Assert.assertEquals(expectedQ, outcomeQ);
         Assert.assertEquals(expectedD, outcomeD);
         Assert.assertEquals(expectedN, outcomeN);
         Assert.assertEquals(expectedP, outcomeP);
+
 
     }
     @Test
@@ -38,10 +40,10 @@ public class ChangeTest {
         int expectedP = 0;
 
         Map<String, Integer> outputMap = moneyManager.coinsDue();
-        int outcomeQ = outputMap.get("QUARTER");
-        int outcomeD = outputMap.get("DIME");
-        int outcomeN = outputMap.get("NICKEL");
-        int outcomeP = outputMap.get("PENNY");
+        int outcomeQ = outputMap.get("quarter");
+        int outcomeD = outputMap.get("dime");
+        int outcomeN = outputMap.get("nickel");
+        int outcomeP = outputMap.get("penny");
         Assert.assertEquals(expectedQ, outcomeQ);
         Assert.assertEquals(expectedD, outcomeD);
         Assert.assertEquals(expectedN, outcomeN);
@@ -57,10 +59,10 @@ public class ChangeTest {
         int expectedP = 1;
 
         Map<String, Integer> outputMap = moneyManager.coinsDue();
-        int outcomeQ = outputMap.get("QUARTER");
-        int outcomeD = outputMap.get("DIME");
-        int outcomeN = outputMap.get("NICKEL");
-        int outcomeP = outputMap.get("PENNY");
+        int outcomeQ = outputMap.get("quarter");
+        int outcomeD = outputMap.get("dime");
+        int outcomeN = outputMap.get("nickel");
+        int outcomeP = outputMap.get("penny");
         Assert.assertEquals(expectedQ, outcomeQ);
         Assert.assertEquals(expectedD, outcomeD);
         Assert.assertEquals(expectedN, outcomeN);
@@ -76,10 +78,10 @@ public class ChangeTest {
         int expectedP = 0;
 
         Map<String, Integer> outputMap = moneyManager.coinsDue();
-        int outcomeQ = outputMap.get("QUARTER");
-        int outcomeD = outputMap.get("DIME");
-        int outcomeN = outputMap.get("NICKEL");
-        int outcomeP = outputMap.get("PENNY");
+        int outcomeQ = outputMap.get("quarter");
+        int outcomeD = outputMap.get("dime");
+        int outcomeN = outputMap.get("nickel");
+        int outcomeP = outputMap.get("penny");
         Assert.assertEquals(expectedQ, outcomeQ);
         Assert.assertEquals(expectedD, outcomeD);
         Assert.assertEquals(expectedN, outcomeN);

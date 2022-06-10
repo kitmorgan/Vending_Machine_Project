@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -35,7 +37,14 @@ public class VendingMachineCLI {
                             BigDecimal deposit = new BigDecimal(userInput);
                             inventoryManager.moneyManager.feedMoney(deposit);
                         }
-                        
+                        if (userInput.matches("2")) {
+                            displayInventory(inventoryManager);
+                            getUserInputProductSelection(inventoryManager);
+                        }
+                        if (userInput.matches("3")) {
+                            finishTransaction(inventoryManager);
+                            break;
+                        }
                     }
                 }
                 if (userInput.equalsIgnoreCase("3")){
@@ -74,7 +83,7 @@ public class VendingMachineCLI {
     }
 
     public void selection123() {
-        System.out.print("\nSelect 1, 2, or 3: ");
+        System.out.print("\nInput 1, 2, or 3: ");
     }
 
     public String getUserInput123() {
@@ -102,9 +111,48 @@ public class VendingMachineCLI {
             userInput = String.valueOf(deposit) + ".00";
             return userInput;
             }catch (NumberFormatException e){
-                System.out.print("Enter a valid whole number: ");
+                System.out.print("Input a valid whole number: ");
             }
         }
 
+    }
+
+    public void getUserInputProductSelection(InventoryManager inventoryManager) {
+        String userInput;
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("Enter a slot number to select an item to purchase: ");
+            userInput = scanner.nextLine();
+            try {
+                inventoryManager.dispense(userInput);
+                Item item = inventoryManager.itemMap.get(userInput);
+                String itemName = item.getName();
+                BigDecimal price = item.getPrice();
+                String noise = item.getNoise();
+                BigDecimal money = inventoryManager.moneyManager.getCurrentMoney();
+                System.out.println(itemName + " | S" + price + " |  S" + money + "\n" + noise);
+                return;
+
+            }
+            catch (NullPointerException npe) {
+                System.out.println("Selection Not Available");
+            }
+
+            catch (Exception e) {
+                System.out.println(e);
+                return;
+            }
+        }
+
+    }
+
+    public void finishTransaction(InventoryManager inventoryManager) throws Exception{
+        Map<String, Integer> coinsReturned = new HashMap<>();
+        coinsReturned =  inventoryManager.moneyManager.coinsDue();
+        for (Map.Entry<String, Integer> entry : coinsReturned.entrySet()) {
+            //
+            String line = entry.getKey() + ": " + String.valueOf(entry.getValue()) + " returned";
+            System.out.println(line);
+        }
     }
 }

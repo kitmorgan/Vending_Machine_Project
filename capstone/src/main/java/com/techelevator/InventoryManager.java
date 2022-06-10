@@ -32,7 +32,7 @@ public class InventoryManager {
                 } else if (itemType.equalsIgnoreCase("Candy")) {
                     item = new Candy(slot, itemName, priceBD);
                 } else if (itemType.equalsIgnoreCase("Drink")) {
-                    item = new Candy(slot, itemName, priceBD);
+                    item = new Drink(slot, itemName, priceBD);
                 } else if (itemType.equalsIgnoreCase("Gum")) {
                     item = new Gum(slot, itemName, priceBD);
                 } else {
@@ -57,6 +57,9 @@ public class InventoryManager {
         // check to see if quantity is enough
         if (itemMap.get(slot).getQuantity() - 1 < 0) {
             throw new Exception("Insufficient Quantity");
+        }
+        if (!itemMap.containsKey(slot)) {
+            throw new Exception("Slot does not exist");
         }
         // give item to customer, pay, log
         itemMap.get(slot).give();

@@ -33,10 +33,13 @@ public class MoneyManager {
         final BigDecimal NICKEL = new BigDecimal(".05");
         final BigDecimal PENNY = new BigDecimal(".01");
         Map<String, Integer> output = new HashMap<>();
-        output.put("QUARTER", 0);
-        output.put("DIME", 0);
-        output.put("NICKEL", 0);
-        output.put("PENNY", 0);
+        //Kit: I don't think we need these puts because we handle the puts down below in our if statements
+        //What is the point of adding them to the map then setting them to 0?
+        //Couldn't we do the put once in our if statement, then specify the amount for the corresponding coin?
+//        output.put("QUARTER", 0);
+//        output.put("DIME", 0);
+//        output.put("NICKEL", 0);
+//        output.put("PENNY", 0);
         if (currentMoney.divide(QUARTER).compareTo(BigDecimal.ONE) >= 0) { // is there at least one quarter owed? .20/.25 >= 1 (false)
             int quarterDue = getChangeDue().divide(QUARTER, RoundingMode.HALF_DOWN).intValue(); // how many quarters are they owed? 2.00 / .25 = 8
             output.put("QUARTER", quarterDue); // put it in the map ("QUARTER", 8)

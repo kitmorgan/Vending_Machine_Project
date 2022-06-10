@@ -33,6 +33,7 @@ public class MoneyManager {
         final BigDecimal nickel = new BigDecimal(".05");
         final BigDecimal penny = new BigDecimal(".01");
         Map<String, Integer> output = new HashMap<>();
+        
         if (currentMoney.divide(quarter).compareTo(BigDecimal.ONE) >= 0) { // is there at least one quarter owed? .20/.25 >= 1 (false)
             int quarterDue = getChangeDue().divide(quarter, RoundingMode.HALF_DOWN).intValue(); // how many quarters are they owed? 2.00 / .25 = 8
             output.put("quarter", quarterDue); // put it in the map ("quarter", 8)

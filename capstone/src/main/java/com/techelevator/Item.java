@@ -61,4 +61,23 @@ abstract class Item {
     public void give() {
         this.quantity = quantity-1;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return item.slot.equals(this.slot) && item.name.equalsIgnoreCase(this.name) && (item.price.compareTo(this.price) == 0);
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "slot='" + slot + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", noise='" + noise + '\'' +
+                '}';
+    }
 }

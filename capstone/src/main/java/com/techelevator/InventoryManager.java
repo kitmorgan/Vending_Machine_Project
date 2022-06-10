@@ -9,11 +9,11 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class InventoryManager {
-    private Map<String, Item> itemMap = new HashMap<>();//Slot, Slot, Item Name, Price
+    protected Map<String, Item> itemMap = new HashMap<>();//Slot, Slot, Item Name, Price
     public MoneyManager moneyManager = new MoneyManager();
-    private File inputFile = new File("logTest.txt");
+    private File inputFile = new File("vendingmachine.csv");
 
-    public InventoryManager(File inputFile) throws Exception {
+    public InventoryManager() throws Exception {
         try (Scanner fileScanner = new Scanner(inputFile);) {
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();

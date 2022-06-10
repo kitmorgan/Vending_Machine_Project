@@ -9,7 +9,7 @@ import java.util.Map;
 public class ChangeTest {
 
     @Test
-    public void one_returns_four_quarters() {
+    public void one_returns_four_quarters() throws Exception{
         MoneyManager moneyManager = new MoneyManager();
         moneyManager.feedMoney(BigDecimal.ONE);
         int expectedQ = 4;
@@ -31,7 +31,7 @@ public class ChangeTest {
 
     }
     @Test
-    public void seventycents_returns_2_quarters_and_2_dimes() {
+    public void seventycents_returns_2_quarters_and_2_dimes()  throws Exception{
         MoneyManager moneyManager = new MoneyManager();
         moneyManager.feedMoney(new BigDecimal(".70"));
         int expectedQ = 2;
@@ -50,7 +50,7 @@ public class ChangeTest {
         Assert.assertEquals(expectedP, outcomeP);
     }
     @Test
-    public void sixtysix_returns_2_quarters_and_1_dimes_1nickel_1penny() {
+    public void sixtysix_returns_2_quarters_and_1_dimes_1nickel_1penny()  throws Exception{
         MoneyManager moneyManager = new MoneyManager();
         moneyManager.feedMoney(new BigDecimal(".66"));
         int expectedQ = 2;
@@ -69,7 +69,7 @@ public class ChangeTest {
         Assert.assertEquals(expectedP, outcomeP);
     }
     @Test
-    public void zero_returns_zero_all() {
+    public void zero_returns_zero_all()  throws Exception{
         MoneyManager moneyManager = new MoneyManager();
         moneyManager.feedMoney(new BigDecimal("0"));
         int expectedQ = 0;

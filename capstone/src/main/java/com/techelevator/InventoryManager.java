@@ -14,6 +14,7 @@ public class InventoryManager {
     private File inputFile = new File("vendingmachine.csv");
 
     public InventoryManager() throws Exception {
+        Log.clearLog();
         try (Scanner fileScanner = new Scanner(inputFile);) {
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();
@@ -60,7 +61,7 @@ public class InventoryManager {
         // give item to customer, pay, log
         itemMap.get(slot).give();
         moneyManager.payFor(price);
-        //Log.dispense(Item item) add new line item to log
+        Log.sale(itemMap.get(slot), moneyManager.getCurrentMoney());
     }
 
 

@@ -19,21 +19,24 @@ public class MoneyManager {
         return currentMoney;
     }
 
-    public void feedMoney(BigDecimal deposit){
+    public void feedMoney(BigDecimal deposit) throws Exception{
         this.currentMoney = this.currentMoney.add(deposit);
+        Log.fed(deposit, currentMoney);
     }
+
 
     public void payFor(BigDecimal price){
         this.currentMoney = this.currentMoney.subtract(price);
     }
 
-    public Map<String, Integer> coinsDue() {
+    public Map<String, Integer> coinsDue() throws Exception{
         final BigDecimal quarter = new BigDecimal(".25");
         final BigDecimal dime = new BigDecimal(".10");
         final BigDecimal nickel = new BigDecimal(".05");
         final BigDecimal penny = new BigDecimal(".01");
         Map<String, Integer> output = new HashMap<>();
-        
+        Log.change(currentMoney);
+
         if (currentMoney.divide(quarter).compareTo(BigDecimal.ONE) >= 0) { // is there at least one quarter owed? .20/.25 >= 1 (false)
             int quarterDue = getChangeDue().divide(quarter, RoundingMode.HALF_DOWN).intValue(); // how many quarters are they owed? 2.00 / .25 = 8
             output.put("quarter", quarterDue); // put it in the map ("quarter", 8)
@@ -59,7 +62,6 @@ public class MoneyManager {
             this.currentMoney = currentMoney.subtract(removeMe);
         }
         return output;
-
     }
 
 

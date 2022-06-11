@@ -37,7 +37,7 @@ public class MoneyManager {
         Map<String, Integer> output = new HashMap<>();
         Log.change(currentMoney);
 
-        if (currentMoney.divide(quarter).compareTo(BigDecimal.ONE) >= 0) { // is there at least one quarter owed? .20/.25 >= 1 (false)
+        if (currentMoney.divide(quarter).compareTo(BigDecimal.ONE) >= 0) { // is there at least one quarter owed? .20/.25 >= 1 (false) .80/.25= 3.2 compare to 1 return 1 >= 0
             int quarterDue = getChangeDue().divide(quarter, RoundingMode.HALF_DOWN).intValue(); // how many quarters are they owed? 2.00 / .25 = 8
             output.put("quarter", quarterDue); // put it in the map ("quarter", 8)
             BigDecimal removeMe = BigDecimal.valueOf(quarterDue).multiply(quarter); // what is the total value of the quarters we are giving them? .25 * 8 = 2.00

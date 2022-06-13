@@ -12,51 +12,49 @@ public class VendingMachineCLI {
 
         // Main Menu
         while (true) {
+            String userInput = "";
             System.out.print("\n(1) Display Vending Machine Items\n(2) Purchase\n(3) Exit\n");
-            String userInput = getUserInput123();
+            userInput = getUserInput123();
+            //Display
+            if (userInput.equalsIgnoreCase("1")) {
+                displayInventory(inventoryManager);
+            }
 
-            while (true) {
-                //Display
-                if (userInput.equalsIgnoreCase("1")) {
-                    displayInventory(inventoryManager);
-                    break;
-                }
-
-                // Purchase
-                if (userInput.equalsIgnoreCase("2")) {
-                    while (true) {
-                        System.out.println("\nCurrent money provided: " + inventoryManager.moneyManager.getCurrentMoney());
-                        System.out.println("");
-                        System.out.println("(1) Feed Money\n(2) Select Product \n(3) Finish Transaction");
-                        userInput = getUserInput123();
-                        // Feed Money
-                        if (userInput.equalsIgnoreCase("1")) {
-                            System.out.print("Enter a whole dollar amount to feed money: ");
-                            userInput = getUserInputWholeNumber();
-                            BigDecimal deposit = new BigDecimal(userInput);
-                            inventoryManager.moneyManager.feedMoney(deposit);
-                        }
-                        // Select Product
-                        if (userInput.equalsIgnoreCase("2")) {
-                            displayInventory(inventoryManager);
-                            getUserInputProductSelection(inventoryManager);
-                        }
-                        // Finish Transaction
-                        if (userInput.equalsIgnoreCase("3")) {
-                            finishTransaction(inventoryManager);
-                            break;
-                        }
-
-                    }
-                }
-                // Exit
-                if (userInput.equalsIgnoreCase("3")){
+            // Purchase
+            else if (userInput.equalsIgnoreCase("2")) {
+                while (true) {
+                    System.out.println("\nCurrent money provided: " + inventoryManager.moneyManager.getCurrentMoney());
                     System.out.println("");
-                    System.out.println("Thank you for using our Vending Machine!");
-                    return;
+                    System.out.println("(1) Feed Money\n(2) Select Product \n(3) Finish Transaction");
+                    userInput = getUserInput123();
+                    // Feed Money
+                    if (userInput.equalsIgnoreCase("1")) {
+                        System.out.print("Enter a whole dollar amount to feed money: ");
+                        userInput = getUserInputWholeNumber();
+                        BigDecimal deposit = new BigDecimal(userInput);
+                        inventoryManager.moneyManager.feedMoney(deposit);
+                    }
+                    // Select Product
+                    if (userInput.equalsIgnoreCase("2")) {
+                        displayInventory(inventoryManager);
+                        getUserInputProductSelection(inventoryManager);
+                    }
+                    // Finish Transaction
+                    if (userInput.equalsIgnoreCase("3")) {
+                        finishTransaction(inventoryManager);
+                        break;
+                    }
+
                 }
             }
+            // Exit
+            else if (userInput.equalsIgnoreCase("3")) {
+                System.out.println("");
+                System.out.println("Thank you for using our Vending Machine!");
+                return;
+            }
         }
+
     }
 
 
@@ -105,17 +103,18 @@ public class VendingMachineCLI {
         }
 
     }
+
     public String getUserInputWholeNumber() {
         String answer = "";
         String userInput = "";
         Scanner scanner = new Scanner(System.in);
         while (true) {
             userInput = scanner.nextLine();
-            try{
-            int deposit = Integer.parseInt(userInput);
-            userInput = String.valueOf(deposit) + ".00";
-            return userInput;
-            }catch (NumberFormatException e){
+            try {
+                int deposit = Integer.parseInt(userInput);
+                userInput = String.valueOf(deposit) + ".00";
+                return userInput;
+            } catch (NumberFormatException e) {
                 System.out.print("Input a valid whole number: ");
             }
         }
@@ -138,12 +137,9 @@ public class VendingMachineCLI {
                 System.out.println(itemName + " | S" + price + " |  S" + money + "\n" + noise);
                 return;
 
-            }
-            catch (NullPointerException npe) {
+            } catch (NullPointerException npe) {
                 System.out.println("Selection Not Available");
-            }
-
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println(e);
                 return;
             }
@@ -151,12 +147,12 @@ public class VendingMachineCLI {
 
     }
 
-    public void finishTransaction(InventoryManager inventoryManager) throws Exception{
+    public void finishTransaction(InventoryManager inventoryManager) throws Exception {
         Map<String, Integer> coinsReturned = new HashMap<>();
-        coinsReturned =  inventoryManager.moneyManager.coinsDue();
+        coinsReturned = inventoryManager.moneyManager.coinsDue();
         for (Map.Entry<String, Integer> entry : coinsReturned.entrySet()) {
             //
-            String line = String.valueOf(entry.getValue())  + " " + entry.getKey() + "s returned";
+            String line = String.valueOf(entry.getValue()) + " " + entry.getKey() + "s returned";
             System.out.println(line);
         }
     }

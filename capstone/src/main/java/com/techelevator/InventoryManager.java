@@ -32,7 +32,7 @@ public class InventoryManager {
                 } else if (itemType.equalsIgnoreCase("Candy")) {
                     item = new Candy(slot, itemName, priceBD);
                 } else if (itemType.equalsIgnoreCase("Drink")) {
-                    item = new Candy(slot, itemName, priceBD);
+                    item = new Drink(slot, itemName, priceBD);
                 } else if (itemType.equalsIgnoreCase("Gum")) {
                     item = new Gum(slot, itemName, priceBD);
                 } else {
@@ -52,11 +52,14 @@ public class InventoryManager {
         int enoughFunds = moneyManager.getCurrentMoney().compareTo(price);
         // check to see if user has enough money
         if (enoughFunds == -1) {
-            throw new Exception("Insufficient Funds");
+            throw new Exception("Deposit more money to purchase an item");
         }
         // check to see if quantity is enough
         if (itemMap.get(slot).getQuantity() - 1 < 0) {
-            throw new Exception("Insufficient Quantity");
+            throw new Exception("Item is sold out");
+        }
+        if (!itemMap.containsKey(slot)) {
+            throw new Exception("Item not available");
         }
         // give item to customer, pay, log
         itemMap.get(slot).give();

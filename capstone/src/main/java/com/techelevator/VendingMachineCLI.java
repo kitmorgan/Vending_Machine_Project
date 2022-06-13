@@ -35,7 +35,7 @@ public class VendingMachineCLI {
                             BigDecimal deposit = new BigDecimal(userInput);
                             inventoryManager.moneyManager.feedMoney(deposit);
                         }
-                        
+
                     }
                 }
                 if (userInput.equalsIgnoreCase("3")){

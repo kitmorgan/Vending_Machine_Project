@@ -2,7 +2,7 @@ package com.techelevator;
 
 import java.math.BigDecimal;
 
-abstract class Item {
+public abstract class Item {
     // instance variables
     private String slot;
     private String name;

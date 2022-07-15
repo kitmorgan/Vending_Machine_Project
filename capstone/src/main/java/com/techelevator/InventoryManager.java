@@ -48,6 +48,9 @@ public class InventoryManager {
     }
 
     public void dispense(String slot) throws Exception {
+        if (!itemMap.containsKey(slot)) {
+            throw new Exception("Item not available");
+        }
         BigDecimal price = itemMap.get(slot).getPrice();
         int enoughFunds = moneyManager.getCurrentMoney().compareTo(price);
         // check to see if user has enough money
@@ -57,9 +60,6 @@ public class InventoryManager {
         // check to see if quantity is enough
         if (itemMap.get(slot).getQuantity() - 1 < 0) {
             throw new Exception("Item is sold out");
-        }
-        if (!itemMap.containsKey(slot)) {
-            throw new Exception("Item not available");
         }
         // give item to customer, pay, log
         itemMap.get(slot).give();

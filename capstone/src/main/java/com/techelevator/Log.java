@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class Log {
     static String timeDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss"));
     static File file = new File("log.csv");
+
     public static void clearLog() throws Exception{
         //clears log when called
         try(PrintWriter writer = new PrintWriter(file)){
